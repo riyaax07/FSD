@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
 
   <style>
-    table, th, td {
-      border: 1px solid rgb(152, 36, 36);
-      
+    table {
+      border-collapse: collapse;
     }
 
-    th, td {
+    table,
+    th,
+    td {
+      border: 1px solid rgb(152, 36, 36);
+    }
+
+    th,
+    td {
       padding: 10px;
+    }
+
+    img {
+      object-fit: contain;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -24,9 +40,12 @@
       <tr>
         <th>Sr. No</th>
         <th>Title</th>
+        <th>Images</th>
         <th>Category</th>
         <th>Price</th>
         <th>Rating</th>
+        <th>Stock</th>
+        <th>Action</th>
       </tr>
     </thead>
 
@@ -34,37 +53,103 @@
     </tbody>
   </table>
 
+
   <script>
 
-    const URL = "https://dummyjson.com/products";
+    
+    const productURL = "https://dummyjson.com/products";
 
+    
     const el = document.getElementById("data");
+
+    
+    let exchangeRate = 1;
+
+
+    
+
+    async function getrate() {
+
+      const rateURL = "https://api.frankfurter.dev/v2/rate/USD/INR";
+
+      try {
+
+        const response = await fetch(rateURL);
+
+        const data = await response.json();
+
+        console.log("Exchange Rate Data:", data);
+
+        
+        exchangeRate = data.rate;
+
+        console.log("Exchange Rate:", exchangeRate);
+
+      } 
+      catch (error) {
+
+        console.error("Error fetching exchange rate:", error);
+
+      }
+
+    }
+
+
+    
 
     async function loadproduct() {
 
       try {
 
-        const response = await fetch(URL);
+        const response = await fetch(productURL);
 
         const data = await response.json();
 
-        console.log(data);
+        console.log("Product Data:", data);
 
-        data.products.map((product, index) => {
 
+        
+        data.products.forEach((product, index) => {
+
+          
+          const priceInINR = product.price * exchangeRate;
+
+
+        
           el.innerHTML += `
             <tr>
+
               <td>${index + 1}</td>
+
               <td>${product.title}</td>
+
+              <td>
+                <img 
+                  src="${product.images[0]}" 
+                  width="100"
+                  height="100"
+                >
+              </td>
+
               <td>${product.category}</td>
-              <td>${product.price}</td>
+
+              <td>₹${priceInINR.toFixed(2)}</td>
+
               <td>${product.rating}</td>
+
+              <td>${product.stock}</td>
+
+              <td>
+                <button>Add to Cart</button>
+              </td>
+
             </tr>
           `;
 
         });
 
-      } catch (error) {
+      } 
+      catch (error) {
 
         console.error("Error fetching product data:", error);
 
@@ -72,9 +157,23 @@
 
     }
 
-    loadproduct();
+
+    
+
+    async function start() {
+
+      
+      await getrate();
+
+      
+      await loadproduct();
+
+    }
+
+    start();
 
   </script>
 
 </body>
+
 </html>
