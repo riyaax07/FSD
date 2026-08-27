@@ -6,15 +6,15 @@ function Book() {
   }, null);
 
   const title = React.createElement("h2",
-    { style: { color: "red" } }, "title: react.js"
+    { style: { color: "red" } }, "Title: react.js"
   );
 
   const price = React.createElement("h2",
-    { style: { color: "green" } }, "price: 465/-"
+    { style: { color: "green" } }, "Price: 465/-"
   );
 
   const btn = React.createElement("button", 
-    { style: { color: "blue" } }, "ADD to cart"
+    { style: { color: "blue" } }, "Add to cart"
   );
 
   const div = React.createElement("div",
