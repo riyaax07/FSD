@@ -1,20 +1,19 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     width: 100%;
     min-height: 100vh;
-    background-color: #15161d;
+    background-color: #e9eaf2;
 }
 
 /* HEADER */
 .header {
     width: 100%;
     height: 10vh;
-    background-color: black;
+    background-color: rgb(199, 166, 211);
     color: white;
 
     display: flex;
@@ -47,22 +46,22 @@ body {
 }
 
 .navbar a {
-    color: white;
+    color: rgb(26, 14, 14);
     text-decoration: none;
     font-size: 20px;
+
 }
 
 /* HOME */
 .home {
-    width: 100%;
-    height: 80vh;
+  width: 100%;
+  min-height: 80vh;
+  padding: 30px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-    font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
 }
 
 /* FOOTER */
