@@ -1,0 +1,22 @@
+
+.count{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+
+}
+.btn{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    
+}
